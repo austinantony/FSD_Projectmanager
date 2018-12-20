@@ -1,10 +1,13 @@
 package com.fsd.project.controller;
 
+import static org.junit.Assert.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -42,67 +45,50 @@ public class TestUserController {
 	UserService userService;
 
 	@Test
-	public void testFindAllUsers() {
-		try {
-	        mockMvc.perform(get("/user")).andExpect(status().isOk());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	public void testFindAllUsers() throws Exception {
+		mockMvc.perform(get("/user")).andExpect(status().isOk());
+	}
+	
+	@Test
+	public void testUserService() {
+		List<User> list = userService.getAllUsers();
+		assertEquals(list.isEmpty(), true);
 	}
 
 	@Test
-	public void testGetUserById() {
-		try {
-			mockMvc.perform(get("/user/1")).andExpect(status().isOk());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	public void testGetUserById() throws Exception {
+		mockMvc.perform(get("/user/1")).andExpect(status().isOk());
 	}
 
 	@Test
-	public void testAddUser() {
-		try {
-			User user = new User("Austin", "Antony", "609742");
-	        String json = new Gson().toJson(user);
-			
-			mockMvc.perform(
-	                post("/user")
-	                        .accept(MediaType.APPLICATION_JSON_VALUE)
-	                        .contentType(MediaType.APPLICATION_JSON_VALUE)
-	                        .content(json))
-	                .andExpect(status().isOk());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	public void testAddUser() throws Exception {
+		User user = new User("Austin", "Antony", "609742");
+        String json = new Gson().toJson(user);
+		
+		mockMvc.perform(
+                post("/user")
+                        .accept(MediaType.APPLICATION_JSON_VALUE)
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .content(json))
+                .andExpect(status().isOk());
 	}
 
 	@Test
-	public void testUpdateUser() {
-		try {
-			User user = new User("Austin", "Antony", "609742");
-	        String json = new Gson().toJson(user);
-			
-			mockMvc.perform(
-	                put("/user")
-	                        .accept(MediaType.APPLICATION_JSON_VALUE)
-	                        .contentType(MediaType.APPLICATION_JSON_VALUE)
-	                        .content(json))
-	                .andExpect(status().isOk());
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	public void testUpdateUser() throws Exception {
+		User user = new User("Austin", "Antony", "609742");
+        String json = new Gson().toJson(user);
+		
+		mockMvc.perform(
+                put("/user")
+                        .accept(MediaType.APPLICATION_JSON_VALUE)
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .content(json))
+                .andExpect(status().isOk());
 	}
 
 	@Test
-	public void testDeleteUser() {
-		try {
-			this.mockMvc.perform(delete("/user/{id}", 1).contentType(MediaType.APPLICATION_JSON))
-					.andExpect(status().isOk());
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	public void testDeleteUser() throws Exception {
+		this.mockMvc.perform(delete("/user/{id}", 1).contentType(MediaType.APPLICATION_JSON))
+				.andExpect(status().isOk());
 	}
-
 }

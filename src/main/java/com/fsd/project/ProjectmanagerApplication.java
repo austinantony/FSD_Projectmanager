@@ -21,9 +21,9 @@ public class ProjectmanagerApplication extends SpringBootServletInitializer {
 	}
 	
 	 @Override
-	    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-	        return application.sources(ProjectmanagerApplication.class);
-	    }	
+	 public SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+		 return application.sources(ProjectmanagerApplication.class);
+	 }	
 	 
 	 @Bean
 	 public CorsFilter corsFilter() {

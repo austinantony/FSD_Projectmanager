@@ -52,8 +52,8 @@ public class TestProjectRepo {
 	public void testDeleteProject() {
 		String projectId = projectRepo.save(new Project("Test Project3", new Date(), new Date(), 10)).getProjectId();
 		projectRepo.deleteById(projectId);
-	    Optional<Project> actual = projectRepo.findById(projectId);
-	    assertEquals(Optional.empty(), actual);
+		Optional<Project> actual = projectRepo.findById(projectId);
+		assertEquals(Optional.empty(), actual);
 	}
 
 }

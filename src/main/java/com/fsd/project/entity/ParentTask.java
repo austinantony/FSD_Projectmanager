@@ -1,5 +1,6 @@
 package com.fsd.project.entity;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -18,7 +19,9 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name = "parent_task")
-public class ParentTask {
+public class ParentTask implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	private String parentId;
 	

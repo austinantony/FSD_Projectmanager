@@ -1,5 +1,6 @@
 package com.fsd.project.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -21,7 +22,9 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
 @Table(name = "project")
 @JsonIgnoreProperties(value = { "users", "task" }, allowGetters = true)
-public class Project {
+public class Project implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	public Project(String project, Date startDate, Date endDate, int priority) {
 		super();

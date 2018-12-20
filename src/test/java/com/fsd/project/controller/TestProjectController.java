@@ -41,54 +41,33 @@ public class TestProjectController {
 	ProjectService projectService;
 
 	@Test
-	public void testFindAllProjects() {
-		try {
-			this.mockMvc.perform(get("/project").content("{\"project\":\"Test Project\"}").contentType(MediaType.APPLICATION_JSON))
-					.andDo(print()).andExpect(status().isOk());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	public void testFindAllProjects() throws Exception {
+		this.mockMvc.perform(get("/project").content("{\"project\":\"Test Project\"}").contentType(MediaType.APPLICATION_JSON))
+				.andDo(print()).andExpect(status().isOk());
 	}
 
 	@Test
-	public void testGetProjectById() {
-		try {
-			this.mockMvc.perform(get("/project/{id}", 1).content("{\"project\":\"Test Project1\"}").contentType(MediaType.APPLICATION_JSON))
-					.andDo(print()).andExpect(status().isOk());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	public void testGetProjectById() throws Exception {
+		this.mockMvc.perform(get("/project/{id}", 1).content("{\"project\":\"Test Project1\"}").contentType(MediaType.APPLICATION_JSON))
+				.andDo(print()).andExpect(status().isOk());
 	}
 
 	@Test
-	public void testAddProject() {
-		try {
-			this.mockMvc.perform(post("/project/{id}", 1).content("{\"project\":\"Test Project2\"}").contentType(MediaType.APPLICATION_JSON))
-					.andDo(print()).andExpect(status().isOk());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	public void testAddProject() throws Exception {
+		this.mockMvc.perform(post("/project/{id}", 1).content("{\"project\":\"Test Project2\"}").contentType(MediaType.APPLICATION_JSON))
+				.andDo(print()).andExpect(status().isOk());
 	}
 
 	@Test
-	public void testUpdateProject() {
-		try {
-			this.mockMvc
-					.perform(put("/project/{id}", 1).content("{\"project\":\"Modified Project\"}")
-							.contentType(MediaType.APPLICATION_JSON))
-					.andDo(print()).andExpect(status().isOk());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	public void testUpdateProject() throws Exception {
+		this.mockMvc
+				.perform(put("/project/{id}", 1).content("{\"project\":\"Modified Project\"}")
+						.contentType(MediaType.APPLICATION_JSON))
+				.andDo(print()).andExpect(status().isOk());
 	}
 
 	@Test
-	public void test_Delete_Project() {
-		try {
-			this.mockMvc.perform(delete("/project/{id}", 1).contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	public void test_Delete_Project() throws Exception {
+		this.mockMvc.perform(delete("/project/{id}", 1).contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
 	}
-
 }

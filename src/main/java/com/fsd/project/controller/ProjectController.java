@@ -32,7 +32,8 @@ public class ProjectController {
 
 	@GetMapping
 	public List<Project> getAllProjects() {
-		logger.info(" : Logging in ProjectController.getAllProjects method");
+		String msg = " : Logging in ProjectController.getAllProjects method";
+		logger.info(msg);
 		return projectService.getAllProjects();
 	}
 

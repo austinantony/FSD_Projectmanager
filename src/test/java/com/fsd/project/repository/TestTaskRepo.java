@@ -3,6 +3,7 @@ package com.fsd.project.repository;
 import static org.junit.Assert.assertEquals;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 import org.junit.Test;
@@ -34,7 +35,7 @@ public class TestTaskRepo {
 	ParentTaskRepository parentRepo;
 
 	
-	/*@Test
+	@Test
 	public void testFindAllTasks() throws Exception{
 		Optional<Project> project=	projectRepo.findById(projectRepo.save(new Project("Test Project", new Date(), new Date(), 10)).getProjectId());
 		Optional<ParentTask> task=	parentRepo.findById(parentRepo.save(new ParentTask("Parent Task")).getParentId());
@@ -42,14 +43,14 @@ public class TestTaskRepo {
 		taskRepo.save(new Task(project.get(),task.get(), "Task2", new Date(), new Date(), 15, "N"));
 		taskRepo.save(new Task(project.get(),task.get(), "Task3", new Date(), new Date(), 10, "N"));
 		List<Task> actual = taskRepo.findAll();
-		 assertThat(actual.size(), is(3));
-	}*/
-
+		assertEquals(actual.isEmpty(), false);
+	}
+	
 	@Test
 	public void testGetTaskById() throws Exception {
-		Optional<Project> project=	projectRepo.findById(projectRepo.save(new Project("Test Project1", new Date(), new Date(), 10)).getProjectId());
-		Optional<ParentTask> task=	parentRepo.findById(parentRepo.save(new ParentTask("Parent Task1")).getParentId());
-		String taskID = taskRepo.save(new Task(project.get(),task.get(), "New Task", new Date(), new Date(), 20, "N")).getTaskId();
+		Project project= projectRepo.save(new Project("Test Project1", new Date(), new Date(), 10));
+		ParentTask task= parentRepo.save(new ParentTask("Parent Task1"));
+		String taskID = taskRepo.save(new Task(project,task, "New Task", new Date(), new Date(), 20, "N")).getTaskId();
 		Optional<Task> actual = taskRepo.findById(taskID);
 		assertEquals("New Task", actual.get().getTask());
 	}

@@ -1,10 +1,7 @@
 package com.fsd.project.repository;
 
-import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.junit.Test;
@@ -27,15 +24,6 @@ public class TestUserRepo {
 	@Autowired
 	UserRepository userRepo;
 	
-	@Test
-	public void testFindAllUsers() throws Exception{
-		userRepo.save(new User("Amit", "Chaudhary",  "E4146788"));
-		userRepo.save(new User("Sumit", "Kimling",  "A4146788"));
-		userRepo.save(new User("Karna", "Tinkle",  "T4146788"));
-		List<User> actual = userRepo.findAll();
-		assertThat(actual.size(), is(3));
-	}
-
 	@Test
 	public void testGetUserById() throws Exception {
 		String userId = userRepo.save(new User("Austin", "Antony",  "609742")).getUserId();

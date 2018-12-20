@@ -1,5 +1,6 @@
 package com.fsd.project.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -25,8 +26,9 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
 @Table(name = "task")
 @JsonIgnoreProperties(value = { "users", "projectId" , "parentTaskId" }, allowGetters = true)
-public class Task {
+public class Task implements Serializable {
 
+	private static final long serialVersionUID = 1L;
 
 	public Task(Project projectId, ParentTask parentTaskId, String task, Date startDate, Date endDate,
 			int priority, String status) {
@@ -54,7 +56,6 @@ public class Task {
 
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "parent_id" , nullable = true)
-//	@JsonBackReference("parentObj")
 	public ParentTask getParentTaskId() {
 		return parentTaskId;
 	}
@@ -136,58 +137,6 @@ public class Task {
 
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((endDate == null) ? 0 : endDate.hashCode());
-		result = prime * result + priority;
-		result = prime * result + ((startDate == null) ? 0 : startDate.hashCode());
-		result = prime * result + ((status == null) ? 0 : status.hashCode());
-		result = prime * result + ((task == null) ? 0 : task.hashCode());
-		result = prime * result + ((taskId == null) ? 0 : taskId.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Task other = (Task) obj;
-		if (endDate == null) {
-			if (other.endDate != null)
-				return false;
-		} else if (!endDate.equals(other.endDate))
-			return false;
-		if (priority != other.priority)
-			return false;
-		if (startDate == null) {
-			if (other.startDate != null)
-				return false;
-		} else if (!startDate.equals(other.startDate))
-			return false;
-		if (status == null) {
-			if (other.status != null)
-				return false;
-		} else if (!status.equals(other.status))
-			return false;
-		if (task == null) {
-			if (other.task != null)
-				return false;
-		} else if (!task.equals(other.task))
-			return false;
-		if (taskId == null) {
-			if (other.taskId != null)
-				return false;
-		} else if (!taskId.equals(other.taskId))
-			return false;
-		return true;
 	}
 
 	public int getPriority() {
