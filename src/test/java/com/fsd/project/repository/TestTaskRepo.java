@@ -36,17 +36,6 @@ public class TestTaskRepo {
 
 	
 	@Test
-	public void testFindAllTasks() throws Exception{
-		Optional<Project> project=	projectRepo.findById(projectRepo.save(new Project("Test Project", new Date(), new Date(), 10)).getProjectId());
-		Optional<ParentTask> task=	parentRepo.findById(parentRepo.save(new ParentTask("Parent Task")).getParentId());
-		taskRepo.save(new Task(project.get(),task.get(), "Task1", new Date(), new Date(), 30, "D"));
-		taskRepo.save(new Task(project.get(),task.get(), "Task2", new Date(), new Date(), 15, "N"));
-		taskRepo.save(new Task(project.get(),task.get(), "Task3", new Date(), new Date(), 10, "N"));
-		List<Task> actual = taskRepo.findAll();
-		assertEquals(actual.isEmpty(), false);
-	}
-	
-	@Test
 	public void testGetTaskById() throws Exception {
 		Project project= projectRepo.save(new Project("Test Project1", new Date(), new Date(), 10));
 		ParentTask task= parentRepo.save(new ParentTask("Parent Task1"));
